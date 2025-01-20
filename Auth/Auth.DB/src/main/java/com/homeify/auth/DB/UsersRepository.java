@@ -9,4 +9,7 @@ public interface UsersRepository extends JpaRepository<UsersModel, String> {
 
     //xóa theo id
     void deleteById(String id);
+
+    //tìm theo username và password
+    UsersModel findByUsernameAndPassword(String username, String password);
 }

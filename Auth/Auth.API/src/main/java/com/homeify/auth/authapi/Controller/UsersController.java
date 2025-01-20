@@ -2,7 +2,9 @@ package com.homeify.auth.authapi.Controller;
 
 import com.homeify.auth.Entities.Users;
 import com.homeify.auth.UseCases.UserUsecase;
+import com.homeify.auth.authapi.DTO.RoleDTO;
 import com.homeify.auth.authapi.DTO.UsersDTO;
+import com.homeify.auth.authapi.Mapper.RoleDTOMapper;
 import com.homeify.auth.authapi.Mapper.UserDTOMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UsersController {
 
     //inject use case
     private final UserUsecase userUsecase;
-
     //mapper
     private final UserDTOMapper usersMapper;
+    private final RoleDTOMapper roleDTOMapper;
 
-    public UsersController(UserUsecase userUsecase, UserDTOMapper usersMapper) {
+    public UsersController(UserUsecase userUsecase, UserDTOMapper usersMapper, RoleDTOMapper roleDTOMapper) {
         this.userUsecase = userUsecase;
         this.usersMapper = usersMapper;
+        this.roleDTOMapper = roleDTOMapper;
     }
 
     //get all
@@ -70,5 +73,16 @@ public class UsersController {
         userUsecase.deleteUser(id);
     }
 
+    //tìm theo id
+    @GetMapping("/find/{id}")
+    public UsersDTO find(@PathVariable String id) {
+        Users u = userUsecase.findUserById(id);
+
+        UsersDTO userDTO = usersMapper.toUserDTO(u);
+
+        List<RoleDTO> roleDTOS = roleDTOMapper.toRoleDTOs(u.getRoles());
+
+        return userDTO;
+    }
 
 }

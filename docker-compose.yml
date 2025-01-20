@@ -84,21 +84,21 @@ services:
       - travel_network
 
   #api gateway
-#  apigateway:
-#    build:
-#      context: ./APIGateway
-#      dockerfile: Dockerfile
-#    volumes:
-#      - maven_cache:/root/.m2         # sử dụng maven_cache build cho nhanh
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - service-registry
-#    environment:
-#      - eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka/
-#      - SERVER_PORT=8080
-#    networks:
-#      - travel_network
+  apigateway:
+    build:
+      context: ./APIGateway
+      dockerfile: Dockerfile
+    volumes:
+      - maven_cache:/root/.m2         # sử dụng maven_cache build cho nhanh
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-registry
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka/
+      - SERVER_PORT=8080
+    networks:
+      - travel_network
 
   #auth service
   travelauthservice:

@@ -11,8 +11,10 @@ public class RouteValidator {
 
     //danh sách endpoint không cần xác thực
     public static final List<String> openApiEndpoints = List.of(
-            "**/login",
-            "**/register"
+            "/api/auth/login",
+            "/api/auth/register",
+            "/api/**/login",
+            "/api/**/register"
     );
 
     //check coi request có phải là endpoint mở hay không

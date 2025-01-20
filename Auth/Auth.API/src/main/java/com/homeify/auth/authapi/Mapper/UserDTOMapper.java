@@ -5,8 +5,6 @@ import com.homeify.auth.authapi.DTO.SaveUserDTO;
 import com.homeify.auth.authapi.DTO.UsersDTO;
 import org.mapstruct.Mapper;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface UserDTOMapper {
 

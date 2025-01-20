@@ -10,10 +10,10 @@ public interface RoleAdapter {
     Role addRole(Role role);
 
     //sửa role
-    Role updateRole(Role role);
+    Role updateRole(Role role, String id);
 
     //xóa role
-    void deleteRole(Role role);
+    void deleteRole(String id);
 
     //lấy tat ca role
     List<Role> getAllRoles();

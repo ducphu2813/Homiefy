@@ -20,4 +20,7 @@ public interface UsersAdapter {
 
     //tìm theo id
     Users findUserById(String userId);
+
+    //tìm theo username và password để login
+    Users findUserByUsernameAndPassword(String username, String password);
 }

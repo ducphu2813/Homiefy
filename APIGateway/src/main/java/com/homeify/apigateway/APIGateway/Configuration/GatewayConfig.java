@@ -24,9 +24,21 @@ public class GatewayConfig {
 
 
         return builder.routes()
-                .route("auth_service_route", r -> r.path("/api/auth/**")     // định nghĩa route đến 1 controller cụ thể
+                .route("auth_users_route", r -> r.path("/api/users/**")     // định nghĩa route đến 1 controller cụ thể
                         .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))   // add filter jwt
-                        .uri("lb://USER"))  // tên service đăng ký trên eureka
+                        .uri("lb://Auth.API"))  // tên service đăng ký trên eureka
+
+                .route("auth_roles_route", r -> r.path("/api/roles/**")
+                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                        .uri("lb://Auth.API"))
+
+                .route("auth_auth_route", r -> r.path("/api/auth/**")
+                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                        .uri("lb://Auth.API"))
+
+                .route("service_info_city_route", r -> r.path("/api/city/**")
+//                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                        .uri("lb://ServiceInfo.API"))
 
                 .build();
 

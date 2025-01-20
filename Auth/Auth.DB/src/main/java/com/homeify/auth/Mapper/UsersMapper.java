@@ -1,10 +1,14 @@
 package com.homeify.auth.Mapper;
 
+import com.homeify.auth.Entities.Role;
 import com.homeify.auth.Entities.Users;
+import com.homeify.auth.Model.UserRoleModel;
 import com.homeify.auth.Model.UsersModel;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface UsersMapper {

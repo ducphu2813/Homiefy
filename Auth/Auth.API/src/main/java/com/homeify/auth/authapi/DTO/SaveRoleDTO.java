@@ -1,12 +1,11 @@
-package com.homeify.auth.Entities;
+package com.homeify.auth.authapi.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Role {
+public class SaveRoleDTO {
 
-    private String id;
     private String name;
 }

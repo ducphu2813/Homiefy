@@ -61,10 +61,10 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             if (token != null && jwtService.validateToken(token)) {
 
                 //phần này test role của user
-                if(roles.stream().noneMatch(role -> role.equals("ADMIN"))){
-                    throw new ForbiddenException("Access denied");
-                }
-                System.out.println("token hợp lệ");
+//                if(roles.stream().noneMatch(role -> role.equals("ADMIN"))){
+//                    throw new ForbiddenException("Access denied");
+//                }
+//                System.out.println("token hợp lệ");
                 // token hợp lệ, add username, roles vào header
                 exchange.getRequest().mutate()
                         .header("X-Username", username)
