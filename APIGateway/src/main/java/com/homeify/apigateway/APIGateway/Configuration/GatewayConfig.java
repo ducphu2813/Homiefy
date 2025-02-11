@@ -18,6 +18,7 @@ public class GatewayConfig {
     }
 
     //tạo route locator
+    //cần tạo tất cả các route cho từng controller
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder
             , AuthenticationFilter authenticationFilter) {
@@ -37,6 +38,10 @@ public class GatewayConfig {
                         .uri("lb://Auth.API"))
 
                 .route("service_info_city_route", r -> r.path("/api/city/**")
+//                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                        .uri("lb://ServiceInfo.API"))
+
+                .route("service_info_airport_route", r -> r.path("/api/airport/**")
 //                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
                         .uri("lb://ServiceInfo.API"))
 

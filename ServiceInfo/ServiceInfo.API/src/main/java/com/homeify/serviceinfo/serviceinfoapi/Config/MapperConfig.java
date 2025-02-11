@@ -1,6 +1,8 @@
 package com.homeify.serviceinfo.serviceinfoapi.Config;
 
+import com.homeify.serviceinfo.Mapper.AirportMapper;
 import com.homeify.serviceinfo.Mapper.CityMapper;
+import com.homeify.serviceinfo.Mapper.FlightMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,5 +15,19 @@ public class MapperConfig {
     public CityMapper cityMapper()
     {
         return Mappers.getMapper(CityMapper.class);
+    }
+
+    //đăng ký bean flight mapper
+    @Bean
+    public FlightMapper flightMapper()
+    {
+        return Mappers.getMapper(FlightMapper.class);
+    }
+
+    //đăng ký bean airport mapper
+    @Bean
+    public AirportMapper airportMapper()
+    {
+        return Mappers.getMapper(AirportMapper.class);
     }
 }
