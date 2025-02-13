@@ -41,9 +41,9 @@ public class AirportController {
 
         Airport airport = airportDTOMapper.toAirport(airportDTO);
 
+        //phần này lấy id từ dto rồi set vào entity
         City city = new City();
         city.setId(airportDTO.getCityId());
-
         airport.setCity(city);
 
         airport = airportUsecase.addAirport(airport);

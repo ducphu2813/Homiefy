@@ -11,10 +11,8 @@ public class Flight {
 
     private String id;
     private String flightNumber;
-    private String flightInfoId;
+    private FlightInfo flightInfo;
     private String airline;
-    private Airport departureAirport;
-    private Airport arrivalAirport;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private String gateNumber;

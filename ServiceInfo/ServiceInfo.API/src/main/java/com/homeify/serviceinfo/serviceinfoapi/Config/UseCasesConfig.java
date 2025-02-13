@@ -3,17 +3,22 @@ package com.homeify.serviceinfo.serviceinfoapi.Config;
 import com.homeify.serviceinfo.Adapter.AirportAdapter;
 import com.homeify.serviceinfo.Adapter.CityAdapter;
 import com.homeify.serviceinfo.Adapter.FlightAdapter;
+import com.homeify.serviceinfo.Adapter.FlightInfoAdapter;
 import com.homeify.serviceinfo.AdapterImpl.AirportAdapterImpl;
 import com.homeify.serviceinfo.AdapterImpl.CityAdapterImpl;
 import com.homeify.serviceinfo.AdapterImpl.FlightAdapterImpl;
+import com.homeify.serviceinfo.AdapterImpl.FlightInfoAdapterImpl;
 import com.homeify.serviceinfo.Mapper.AirportMapper;
 import com.homeify.serviceinfo.Mapper.CityMapper;
+import com.homeify.serviceinfo.Mapper.FlightInfoMapper;
 import com.homeify.serviceinfo.Mapper.FlightMapper;
 import com.homeify.serviceinfo.Repository.AirportRepository;
 import com.homeify.serviceinfo.Repository.CityRepository;
+import com.homeify.serviceinfo.Repository.FlightInfoRepository;
 import com.homeify.serviceinfo.Repository.FlightRepository;
 import com.homeify.serviceinfo.UseCases.AirportUsecase;
 import com.homeify.serviceinfo.UseCases.CityUsecase;
+import com.homeify.serviceinfo.UseCases.FlightInfoUsecase;
 import com.homeify.serviceinfo.UseCases.FlightUsecase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,9 +39,15 @@ public class UseCasesConfig {
     //adapter của flight
     @Bean
     public FlightAdapter flightAdapter (FlightRepository flightRepository
-                                    , FlightMapper flightMapper)
+                                    , FlightMapper flightMapper
+                                    , FlightInfoRepository flightInfoRepository
+                                    , FlightInfoMapper flightInfoMapper
+                                    , AirportRepository airportRepository
+                                    , AirportMapper airportMapper
+                                    , CityRepository cityRepository
+                                    , CityMapper cityMapper)
     {
-        return new FlightAdapterImpl(flightRepository, flightMapper);
+        return new FlightAdapterImpl(flightRepository, flightMapper, flightInfoRepository, flightInfoMapper, airportRepository, airportMapper, cityRepository, cityMapper);
     }
 
     //adapter của airport
@@ -48,6 +59,21 @@ public class UseCasesConfig {
     {
         return new AirportAdapterImpl(airportRepository, airportMapper, cityRepository, cityMapper);
     }
+
+    //adapter của flight info
+    @Bean
+    public FlightInfoAdapter flightInfoAdapter (FlightInfoRepository flightInfoRepository
+                                    , FlightInfoMapper flightInfoMapper
+                                    , AirportRepository airportRepository
+                                    , AirportMapper airportMapper
+                                    , CityRepository cityRepository
+                                    , CityMapper cityMapper)
+    {
+        return new FlightInfoAdapterImpl(flightInfoRepository, flightInfoMapper, airportRepository, airportMapper, cityRepository, cityMapper);
+    }
+
+
+
     //đăng ký use case
 
     //use case của city
@@ -66,5 +92,11 @@ public class UseCasesConfig {
     @Bean
     public AirportUsecase airportUsecase (AirportAdapter airportAdapter){
         return new AirportUsecase(airportAdapter);
+    }
+
+    //use case của flight info
+    @Bean
+    public FlightInfoUsecase flightInfoUsecase (FlightInfoAdapter flightInfoAdapter){
+        return new FlightInfoUsecase(flightInfoAdapter);
     }
 }

@@ -18,17 +18,17 @@ COPY ServiceInfo/ServiceInfo.API/pom.xml ServiceInfo/ServiceInfo.API/pom.xml
 
 # build từng module phụ riêng lẻ
 COPY ServiceInfo/ServiceInfo.Entities/ ServiceInfo/ServiceInfo.Entities/
-RUN mvn -f ServiceInfo/ServiceInfo.Entities/pom.xml clean install -DskipTests -Dmaven.repo.local=/root/.m2
+RUN mvn -f ServiceInfo/ServiceInfo.Entities/pom.xml  install -DskipTests -Dmaven.repo.local=/root/.m2
 
 COPY ServiceInfo/ServiceInfo.UseCases/ ServiceInfo/ServiceInfo.UseCases/
-RUN mvn -f ServiceInfo/ServiceInfo.UseCases/pom.xml clean install -DskipTests -Dmaven.repo.local=/root/.m2
+RUN mvn -f ServiceInfo/ServiceInfo.UseCases/pom.xml  install -DskipTests -Dmaven.repo.local=/root/.m2
 
 COPY ServiceInfo/ServiceInfo.DB/ ServiceInfo/ServiceInfo.DB/
-RUN mvn -f ServiceInfo/ServiceInfo.DB/pom.xml clean install -DskipTests -Dmaven.repo.local=/root/.m2
+RUN mvn -f ServiceInfo/ServiceInfo.DB/pom.xml  install -DskipTests -Dmaven.repo.local=/root/.m2
 
 #copy phần code của module API
 COPY ServiceInfo/ServiceInfo.API/ ServiceInfo/ServiceInfo.API/
-RUN mvn -f ServiceInfo/ServiceInfo.API/pom.xml clean package -DskipTests -Dmaven.repo.local=/root/.m2
+RUN mvn -f ServiceInfo/ServiceInfo.API/pom.xml  package -DskipTests -Dmaven.repo.local=/root/.m2
 
 #stage 3: run app
 FROM amazoncorretto:21-alpine AS runtime

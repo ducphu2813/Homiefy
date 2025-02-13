@@ -1,8 +1,8 @@
 package com.homeify.serviceinfo.serviceinfoapi.Mapper;
 
 import com.homeify.serviceinfo.Entities.Flight;
-import com.homeify.serviceinfo.serviceinfoapi.DTO.FlightDTO;
-import com.homeify.serviceinfo.serviceinfoapi.DTO.SaveFlightDTO;
+import com.homeify.serviceinfo.serviceinfoapi.DTO.Flight.FlightDTO;
+import com.homeify.serviceinfo.serviceinfoapi.DTO.Flight.SaveFlightDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

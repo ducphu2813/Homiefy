@@ -45,6 +45,14 @@ public class GatewayConfig {
 //                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
                         .uri("lb://ServiceInfo.API"))
 
+                .route("service_info_flight_info_route", r -> r.path("/api/flight-info/**")
+//                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                        .uri("lb://ServiceInfo.API"))
+
+                .route("service_info_flight_route", r -> r.path("/api/flight/**")
+//                        .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                        .uri("lb://ServiceInfo.API"))
+
                 .build();
 
     }

@@ -8,10 +8,16 @@ import com.homeify.serviceinfo.Mapper.CityMapper;
 import com.homeify.serviceinfo.Model.AirportModel;
 import com.homeify.serviceinfo.Repository.AirportRepository;
 import com.homeify.serviceinfo.Repository.CityRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
+@Service
 public class AirportAdapterImpl implements AirportAdapter {
 
     private final AirportRepository airportRepository;
@@ -81,18 +87,31 @@ public class AirportAdapterImpl implements AirportAdapter {
     public List<Airport> getAllAirport() {
         List<AirportModel> airportModels = airportRepository.findAll();
 
+        //lấy danh sách city id từ airportModels
+        List<String> cityIds = airportModels.stream()
+                .map(airportModel -> airportModel.getCityId())
+                .filter(Objects::nonNull)
+                .distinct()
+                .toList();
+
+        //lấy danh sách city từ cityIds
+        Map<String, City> cityMap = cityRepository.findAllByIdIn(cityIds)
+                .stream()
+                .map(cityMapper::toCity)  // sử dụng CityMapper để chuyển CityModel -> City
+                .collect(Collectors.toMap(City::getId, Function.identity()));
+
         //chuyển từ List<AirportModel> sang List<Airport>
         //cần chú ý chuyển cityId sang city
         //lấy danh sách airport và dùng stream để chuyển từ airportModel sang airport
-        List<Airport> airports = airportModels.stream()
+        return airportModels.stream()
                 .map(airportModel -> {
                     Airport airport = airportMapper.toAirport(airportModel);
-                    airport.setCity(cityMapper.toCity(cityRepository.findById(airportModel.getCityId()).orElse(null)));
+                    airport.setCity(cityMap.get(airportModel.getCityId()));
                     return airport;
                 })
-                .toList();
+                .collect(Collectors.toList());
 
-        return airports;
+//        return airports;
     }
 
     @Override

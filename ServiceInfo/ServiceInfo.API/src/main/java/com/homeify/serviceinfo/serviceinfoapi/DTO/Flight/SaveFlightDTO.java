@@ -1,4 +1,4 @@
-package com.homeify.serviceinfo.serviceinfoapi.DTO;
+package com.homeify.serviceinfo.serviceinfoapi.DTO.Flight;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,14 +11,11 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlightDTO {
+public class SaveFlightDTO {
 
-    private String id;
     private String flightNumber;
     private String flightInfoId;
     private String airline;
-    private String departureAirportId;
-    private String arrivalAirportId;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private String gateNumber;
